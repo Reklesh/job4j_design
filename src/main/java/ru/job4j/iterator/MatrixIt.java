@@ -18,10 +18,10 @@ public class MatrixIt implements Iterator<Integer> {
             row++;
             column = 0;
             if (row == data.length) {
-                return false;
+                break;
             }
         }
-        return true;
+        return row < data.length;
     }
 
     @Override
