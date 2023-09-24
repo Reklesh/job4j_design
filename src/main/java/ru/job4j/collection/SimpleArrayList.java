@@ -24,22 +24,21 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     private void grow() {
         if (container.length == 0) {
             container = (T[]) new Object[1];
+        } else {
+            container = Arrays.copyOf(container, container.length * 2);
         }
-        container = Arrays.copyOf(container, container.length * 2);
     }
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, size);
-        T value = container[index];
+        T value = get(index);
         container[index] = newValue;
         return value;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, size);
-        T value = container[index];
+        T value = get(index);
         size = size - 1;
         if (size > index) {
             System.arraycopy(container, index + 1, container, index, size - index);
