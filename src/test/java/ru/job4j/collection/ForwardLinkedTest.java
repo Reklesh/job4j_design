@@ -43,6 +43,32 @@ class ForwardLinkedTest {
         assertThat(list.get(2)).isEqualTo(3);
         assertThat(list.get(3)).isEqualTo(4);
     }
+    @Test
+    void whenAddFirstFromEmptyListAndGet() {
+        list = new ForwardLinked<>();
+        list.addFirst(1);
+        list.addFirst(2);
+        assertThat(list.get(0)).isEqualTo(2);
+        assertThat(list.get(1)).isEqualTo(1);
+    }
+
+    @Test
+    void whenAddFirstAndGet() {
+        list.addFirst(5);
+        list.addFirst(6);
+        assertThat(list.get(0)).isEqualTo(6);
+        assertThat(list.get(1)).isEqualTo(5);
+    }
+
+    @Test
+    void whenAddFirstFromEmptyListItNextTwoNextOne() {
+        list = new ForwardLinked<>();
+        list.addFirst(1);
+        list.addFirst(2);
+        Iterator<Integer> it = list.iterator();
+        assertThat(it.next()).isEqualTo(2);
+        assertThat(it.next()).isEqualTo(1);
+    }
 
     @Test
     void whenGetFromOutOfBoundThenExceptionThrown() {
