@@ -1,9 +1,7 @@
 package ru.job4j.tree;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.NoSuchElementException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -55,6 +53,15 @@ public class SimpleTreeTest {
         tree.add(1, 2);
         assertThatThrownBy(() -> tree.findBy(3).orElseThrow())
                 .isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    void checkBinary() {
+        Tree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        assertThat(tree.isBinary()).isFalse();
     }
 }
 
