@@ -26,4 +26,5 @@ public class Analize {
         deleted = map.size();
         return new Info(added, changed, deleted);
     }
+
 }
