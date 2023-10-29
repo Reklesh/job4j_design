@@ -49,4 +49,24 @@ class ConfigTest {
                 .hasMessageMatching("^.+")
                 .hasMessageContaining("value");
     }
+
+    @Test
+    void checkStringNotKey() {
+        String path = "./data/string_not_key.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("^.+")
+                .hasMessageContaining("key");
+    }
+
+    @Test
+    void checkStringOnlyEqualSign() {
+        String path = "./data/only_equal_sign.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("^.+")
+                .hasMessageContaining("=");
+    }
 }
