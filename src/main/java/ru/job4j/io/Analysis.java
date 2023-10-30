@@ -12,10 +12,10 @@ public class Analysis {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 if (!server && (line.contains("400") || line.contains("500"))) {
                     server = true;
-                    out.print(line.split(" ")[1].concat("; "));
+                    out.printf("%s; ", line.split(" ")[1]);
                 } else if (server && (line.contains("200") || line.contains("300"))) {
                     server = false;
-                    out.println(line.split(" ")[1].concat(";"));
+                    out.printf("%s;%n", line.split(" ")[1]);
                 }
             }
         } catch (IOException e) {
