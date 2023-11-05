@@ -15,11 +15,26 @@ public class Search {
         return searcher.getPaths();
     }
 
+    private static boolean validate(String[] args) {
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Указаны не все параметры поиска");
+        }
+        if (args.length == 2 && args[0].compareTo(".") != 0) {
+            throw new IllegalArgumentException("Указана не корневая папка");
+        }
+        if (args.length == 2 && !args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Указано несуществующее расширение файла");
+        }
+        return true;
+    }
+
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(".");
-        search(start, p -> p.toFile()
-                .getName()
-                .endsWith(".js"))
-                .forEach(System.out::println);
+        if (validate(args)) {
+            Path start = Paths.get(args[0]);
+            search(start, p -> p.toFile()
+                    .getName()
+                    .endsWith(args[1]))
+                    .forEach(System.out::println);
+        }
     }
 }
