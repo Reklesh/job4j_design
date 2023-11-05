@@ -5,11 +5,10 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.stream.Stream;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
@@ -17,14 +16,18 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        BiFunction<List<Path>, List<Path>, List<Path>> function
-                = (oldValue, newValue) -> Stream.concat(oldValue.stream(), newValue.stream()).toList();
-        map.merge(new FileProperty(file.toFile().length(), file.toFile().getName()),
-                List.of(file.toAbsolutePath()), function);
+        map.computeIfAbsent(new FileProperty(file.toFile().length(), file.toFile().getName()),
+                k -> new ArrayList<>()).add(file.toAbsolutePath());
         return super.visitFile(file, attrs);
     }
 
-    public Map<FileProperty, List<Path>> getMap() {
-        return map;
+    public void getMap() {
+        for (FileProperty file : map.keySet()) {
+            List<Path> paths = map.get(file);
+            if (paths.size() > 1) {
+                System.out.printf("%s - %s%n", file.getName(), file.getSize());
+                paths.forEach(value -> System.out.printf("    %s%n", value));
+            }
+        }
     }
 }
