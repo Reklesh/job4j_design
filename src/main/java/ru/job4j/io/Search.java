@@ -16,13 +16,16 @@ public class Search {
     }
 
     private static boolean validate(String[] args) {
-        if (args.length < 2) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("Указаны не все параметры поиска");
         }
-        if (args.length == 2 && args[0].compareTo(".") != 0) {
-            throw new IllegalArgumentException("Указана не корневая папка");
+        if (!Files.exists(Paths.get(args[0]))) {
+            throw new IllegalArgumentException("Указанный путь не существует");
         }
-        if (args.length == 2 && !args[1].startsWith(".")) {
+        if (!Files.isDirectory(Paths.get(args[0]))) {
+            throw new IllegalArgumentException("Указанный путь не является каталогом");
+        }
+        if (!args[1].startsWith(".") && args[1].length() <= 1) {
             throw new IllegalArgumentException("Указано несуществующее расширение файла");
         }
         return true;
