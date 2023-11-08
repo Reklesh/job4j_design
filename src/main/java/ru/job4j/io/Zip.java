@@ -64,7 +64,7 @@ public class Zip {
         ArgsName argsName = ArgsName.of(args);
         if (validate(argsName)) {
             Path start = Paths.get(argsName.get("d"));
-            zip.packFiles(Search.search(start, p -> p.toFile().getName().
+            zip.packFiles(Search.search(start, p -> !p.toFile().getName().
                             endsWith(argsName.get("e"))),
                     new File(argsName.get("o")));
         }
