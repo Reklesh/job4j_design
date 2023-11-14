@@ -1,10 +1,7 @@
 package ru.job4j.io;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class ConsoleChat {
@@ -21,20 +18,21 @@ public class ConsoleChat {
 
     public void run() {
         List<String> strings = new ArrayList<>();
+        var phrases = readPhrases();
         Scanner input = new Scanner(System.in);
         int answer;
         String name = input.nextLine();
         strings.add(name);
-        while (!name.equals(OUT)) {
-            if (name.equals(STOP)) {
-                while (!name.equals(CONTINUE)) {
+        while (!OUT.equals(name)) {
+            if (STOP.equals(name)) {
+                while (!CONTINUE.equals(name)) {
                     name = input.nextLine();
                     strings.add(name);
                 }
             }
-            answer = new Random().nextInt(readPhrases().size());
-            System.out.println(readPhrases().get(answer));
-            strings.add(readPhrases().get(answer));
+            answer = new Random().nextInt(phrases.size());
+            System.out.println(phrases.get(answer));
+            strings.add(phrases.get(answer));
             name = input.nextLine();
             strings.add(name);
         }
@@ -42,20 +40,20 @@ public class ConsoleChat {
     }
 
     private List<String> readPhrases() {
-        List<String> lines = Collections.emptyList();
-        Path path = Paths.get(botAnswers);
-        try {
-            lines = Files.readAllLines(path, Charset.forName("windows-1251"));
+        List<String> list = Collections.emptyList();
+        try (BufferedReader in = new BufferedReader(
+                new FileReader(botAnswers, Charset.forName("WINDOWS-1251")))) {
+            list = in.lines().toList();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return list;
     }
 
     private void saveLog(List<String> log) {
-        Path path = Paths.get(this.path);
-        try {
-            Files.write(path, log, Charset.forName("windows-1251"));
+        try (PrintWriter printWriter = new PrintWriter(
+                new FileWriter(this.path, Charset.forName("WINDOWS-1251")))) {
+            log.forEach(printWriter::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
