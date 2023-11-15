@@ -40,7 +40,7 @@ public class ConsoleChat {
     }
 
     private List<String> readPhrases() {
-        List<String> list = Collections.emptyList();
+        List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(
                 new FileReader(botAnswers, Charset.forName("WINDOWS-1251")))) {
             list = in.lines().toList();
