@@ -11,18 +11,19 @@ import java.util.StringJoiner;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
+        String delimiter = argsName.get("delimiter");
         boolean rev = true;
         int[] indexRow = new int[]{};
         StringJoiner lineToFile;
         try (var scanner = new Scanner(new FileReader(argsName.get("path")));
              PrintStream stream = new PrintStream(new FileOutputStream(argsName.get("out")))) {
             while (scanner.hasNextLine()) {
-                String[] str = scanner.nextLine().split(argsName.get("delimiter"));
+                String[] str = scanner.nextLine().split(delimiter);
                 if (rev) {
                     indexRow = filter(str, argsName);
                     rev = false;
                 }
-                lineToFile = new StringJoiner(argsName.get("delimiter"), "", System.lineSeparator());
+                lineToFile = new StringJoiner(delimiter, "", System.lineSeparator());
                 for (int i : indexRow) {
                     lineToFile.add(str[i]);
                 }
@@ -43,7 +44,7 @@ public class CSVReader {
         return ints;
     }
 
-    private static boolean validate(ArgsName argsName) {
+    private static void validate(ArgsName argsName) {
         if (!Files.exists(Paths.get(argsName.get("path")))) {
             throw new IllegalArgumentException(
                     String.format("Указанный путь %s не существует", argsName.get("path")));
@@ -66,7 +67,6 @@ public class CSVReader {
         if (!argsName.get("out").endsWith(".csv")) {
             throw new IllegalArgumentException("Указано неверное расширение конечного файла");
         }
-        return true;
     }
 
     public static void main(String[] args) throws Exception {
@@ -74,8 +74,7 @@ public class CSVReader {
             throw new IllegalArgumentException("Указаны не все параметры поиска");
         }
         ArgsName argsName = ArgsName.of(args);
-        if (validate(argsName)) {
-            handle(argsName);
-        }
+        validate(argsName);
+        handle(argsName);
     }
 }
