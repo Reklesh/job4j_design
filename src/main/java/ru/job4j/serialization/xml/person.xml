@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<person param1="true" param2="100.5" param3="ABC">
+    <object param="AB"/>
+    <statuses>
+        <status>1</status>
+        <status>2</status>
+        <status>3</status>
+    </statuses>
+</person>
