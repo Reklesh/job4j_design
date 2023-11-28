@@ -17,6 +17,26 @@ public class Person {
         this.array = array;
     }
 
+    public boolean getParam1() {
+        return param1;
+    }
+
+    public double getParam2() {
+        return param2;
+    }
+
+    public String getParam3() {
+        return param3;
+    }
+
+    public NestedObject getObject() {
+        return object;
+    }
+
+    public int[] getArray() {
+        return array;
+    }
+
     @Override
     public String toString() {
         return "Person{"

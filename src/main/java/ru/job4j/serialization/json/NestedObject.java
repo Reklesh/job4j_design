@@ -7,6 +7,10 @@ public class NestedObject {
         this.param = param;
     }
 
+    public String getParam() {
+        return param;
+    }
+
     @Override
     public String toString() {
         return "NestedObject{"
