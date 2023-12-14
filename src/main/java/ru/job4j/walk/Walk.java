@@ -3,12 +3,14 @@ package ru.job4j.walk;
 import ru.job4j.io.ArgsName;
 import ru.job4j.io.Search;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 public class Walk {
 
@@ -47,18 +49,9 @@ public class Walk {
     }
 
     private static Predicate<Path> condition(String pattern, String typeSearch) {
-        Predicate<Path> predicate;
-        if (Objects.equals(typeSearch, "mask")) {
-            PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + pattern);
-            predicate = p -> matcher.matches(p.getFileName());
-        } else if (Objects.equals(typeSearch, "regex")) {
-            Pattern pat = Pattern.compile(pattern);
-            predicate = p -> pat.matcher(p.toFile().getName()).find();
-        } else {
-            Pattern pat = Pattern.compile(pattern);
-            predicate = p -> pat.matcher(p.toFile().getName()).matches();
-        }
-        return predicate;
+        String s = Objects.equals(typeSearch, "mask") ? "glob:" : "regex:";
+        PathMatcher matcher = FileSystems.getDefault().getPathMatcher(s + pattern);
+        return p -> matcher.matches(p.getFileName());
     }
 
     public static void main(String[] args) throws IOException {
