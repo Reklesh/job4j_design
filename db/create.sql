@@ -1,0 +1,1 @@
+select * from christmas_tree;
