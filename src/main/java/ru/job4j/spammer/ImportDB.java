@@ -36,13 +36,13 @@ public class ImportDB {
         if (args.length != 2) {
             throw new IllegalArgumentException("Неверный формат данных");
         }
-        if (args[0] == null && args[1] == null) {
+        if (args[0].isBlank() && args[1].isBlank()) {
             throw new IllegalArgumentException("Отсутствует имя и почта спамера");
         }
-        if (args[0] == null) {
+        if (args[0].isBlank()) {
             throw new IllegalArgumentException("Отсутствует имя спамера");
         }
-        if (args[1] == null) {
+        if (args[1].isBlank()) {
             throw new IllegalArgumentException("Отсутствует почта спамера");
         }
         return true;
