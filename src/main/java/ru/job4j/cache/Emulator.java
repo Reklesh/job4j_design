@@ -42,13 +42,7 @@ public class Emulator {
                 System.out.println(FILE_NAME);
                 String file = scanner.nextLine();
                 validateFile(file, directory);
-                var result = dirFileCache.get(file);
-                if (result != null) {
-                    System.out.println(result);
-                } else {
-                    dirFileCache.put(file, dirFileCache.load(file));
-                    System.out.println(dirFileCache.get(file));
-                }
+                System.out.println(dirFileCache.get(file));
             } else {
                 run = false;
                 System.out.println(EXIT);
@@ -91,5 +85,4 @@ public class Emulator {
         DirFileCache dirFileCache = new DirFileCache(directory);
         start(scanner, dirFileCache);
     }
-
 }
