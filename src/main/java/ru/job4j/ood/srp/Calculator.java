@@ -10,7 +10,7 @@ public class Calculator {
     }
 
     public void logCalculation(String operation, int result) {
-        // логирование операции и результата
+
     }
 }
 

@@ -10,11 +10,11 @@ public class Order {
     }
 
     public void calculateTotal() {
-        // вычисление общей суммы заказа
+
     }
 
     public void printOrderDetails() {
-        // печать деталей заказа
+
     }
 }
 
