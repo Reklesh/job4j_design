@@ -4,5 +4,6 @@ import java.io.IOException;
 
 public class Superclass {
     public void doSomething() throws IOException {
+
     }
 }
