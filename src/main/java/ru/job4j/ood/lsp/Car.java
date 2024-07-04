@@ -15,4 +15,5 @@ public class Car {
     public void setSize(int size) {
         this.size = size;
     }
+
 }

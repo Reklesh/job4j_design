@@ -5,4 +5,5 @@ public class TrucksParking implements Parking {
     @Override
     public void conditionForAdd(Car car, int carParkingSpace, int truckParkingSpace) {
     }
+
 }
