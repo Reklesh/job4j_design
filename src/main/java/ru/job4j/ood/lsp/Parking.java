@@ -24,4 +24,5 @@ public interface Parking {
     }
 
     void conditionForAdd(Car car, int carParkingSpace, int truckParkingSpace);
+
 }
