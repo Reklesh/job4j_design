@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface Parking {
-
     List<Car> CAR_LIST = new ArrayList<>();
     List<Car> TRUCK_LIST = new ArrayList<>();
 
@@ -25,5 +24,4 @@ public interface Parking {
     }
 
     void conditionForAdd(Car car, int carParkingSpace, int truckParkingSpace);
-
 }

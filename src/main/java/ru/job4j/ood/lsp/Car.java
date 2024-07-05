@@ -1,7 +1,6 @@
 package ru.job4j.ood.lsp;
 
 public class Car {
-
     private int size;
 
     public Car(int size) {
@@ -15,5 +14,4 @@ public class Car {
     public void setSize(int size) {
         this.size = size;
     }
-
 }
