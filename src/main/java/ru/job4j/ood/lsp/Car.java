@@ -9,6 +9,7 @@ public class Car {
 
     public int getSize() {
         return size;
+
     }
 
     public void setSize(int size) {
