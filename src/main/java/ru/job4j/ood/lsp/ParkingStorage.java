@@ -10,19 +10,21 @@ public class ParkingStorage implements Storage {
 
     @Override
     public void addToCarList(Car car) {
+        carList.add(car);
     }
 
     @Override
     public void addToTruckList(Car car) {
+        truckList.add(car);
     }
 
     @Override
     public int getCar() {
-        return 0;
+        return carList.size();
     }
 
     @Override
     public int getTruck() {
-        return 0;
+        return truckList.size();
     }
 }

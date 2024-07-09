@@ -17,5 +17,8 @@ public class ParkingService {
     }
 
     public void distribution(Car car) {
+        for (Parking parking : list) {
+            parking.conditionForAdd(car, carParkingSpace, truckParkingSpace, storage);
+        }
     }
 }
