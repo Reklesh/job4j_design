@@ -15,4 +15,8 @@ public class ControlQuality {
             store.add(food);
         }
     }
+
+    public void resort() {
+        list.forEach(store -> store.getList().forEach(this::distribution));
+    }
 }
