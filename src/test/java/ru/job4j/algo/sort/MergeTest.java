@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class MergeTest {
-
     @Test
     void whenSortedThenOk() {
         int[] array = {10, 4, 6, 4, 8, -13, 2, 3};
@@ -17,4 +16,5 @@ class MergeTest {
         int[] array = {2, 1, 4, 0, 5};
         assertThat(Merge.mergesort(array)).containsExactly(0, 1, 2, 4, 5);
     }
+
 }
