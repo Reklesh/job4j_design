@@ -3,6 +3,7 @@ package ru.job4j.algo.sort;
 import java.util.Arrays;
 
 public class Merge {
+
     public static int[] mergesort(int[] array) {
         int[] result = array;
         int n = array.length;
