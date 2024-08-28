@@ -90,9 +90,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 swap(isLeft, source, parent, current, heir);
                 heir.left = current.left;
             }
-            if (Objects.nonNull(current.key)) {
-                current.key = null;
-            }
+            current.key = null;
             if (Objects.nonNull(current.left)) {
                 current.left = null;
             }
@@ -188,6 +186,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node maximum(Node node) {
         return Objects.isNull(node.right) ? node : maximum(node.right);
+    }
+
+    public void clear() {
+        Node node = root;
+        clear(node);
+        root = null;
+    }
+
+    private void clear(Node first) {
+        if (Objects.nonNull(first)) {
+            clear(first.left);
+            clear(first.right);
+            first.key = null;
+            if (Objects.nonNull(first.left)) {
+                first.left = null;
+            }
+            if (Objects.nonNull(first.right)) {
+                first.right = null;
+            }
+        }
     }
 
     @Override
